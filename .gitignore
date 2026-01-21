@@ -1,0 +1,17 @@
+# --- Python Housekeeping ---
+# Mencegah folder cache python terupload
+__pycache__/
+*.py[cod]
+
+# --- Environment & Settings ---
+# Folder virtual environment (sangat berat jika diupload)
+venv/
+.env
+
+# --- Project Data ---
+# Kita tidak mau upload data mentah CSV ke GitHub karena size-nya
+# Data harusnya didownload user sendiri atau ditaruh di Cloud Storage terpisah
+data_raw/
+*.csv
+*.json
+!example_data.json  # Tanda seru artinya: KECUALI file ini
