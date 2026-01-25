@@ -56,6 +56,8 @@ class JobMarketAnalyzer :
         Method untuk mencari perusahaan mana yang paling banyak membuka lowongan
         """
         pipeline = [
+            #Stage Bersih bersih
+            {"$match" : {"company": {"$ne": None}}},
             #Stage grouping
             {
                 "$group": {
@@ -71,8 +73,8 @@ class JobMarketAnalyzer :
             #Stage Limit
             {"$limit": limit}
         ]
-    results = list(self.collection.aggregate(pipeline))
-    return pd.DataFrame(results)
+        results = list(self.collection.aggregate(pipeline))
+        return pd.DataFrame(results)
     
 # --- UJI COBA CLASS (Main Program) ---
 if __name__ == "__main__" :
@@ -89,6 +91,11 @@ if __name__ == "__main__" :
     #Format angka
     pd.options.display.float_format = '{:,.0f}'.format
     print(df_salary)
+
+    # 4. Cetak Laporan 2: Top Companies
+    print("\n🏆 LAPORAN 2: Top 5 Perusahaan Paling Aktif")
+    df_top = bot.get_top_companies(limit=5)
+    print(df_top)
 
 # python src/job_analyzer.py
 
